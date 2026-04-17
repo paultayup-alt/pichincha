@@ -20,7 +20,7 @@ pool.getConnection()
   })
   .catch(err => {
     console.error('❌  Error conectando a MySQL:', JSON.stringify(err));
-    process.exit(1);
+    console.error('❌  Error conectando a MySQL:', err.message);
   });
 
 module.exports = pool;
