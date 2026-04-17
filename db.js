@@ -25,3 +25,5 @@ pool.getConnection()
   });
 
 module.exports = pool;
+// db.js — Conexión a MySQL con mysql2
+// v2
