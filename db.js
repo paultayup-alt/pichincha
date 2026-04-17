@@ -1,4 +1,4 @@
-// db.js — Conexión a MySQL con mysql2
+// db.js
 require('dotenv').config();
 const mysql = require('mysql2/promise');
 
@@ -13,7 +13,6 @@ const pool = mysql.createPool({
   ssl: { rejectUnauthorized: false }
 });
 
-// Verificar conexión al arrancar
 pool.getConnection()
   .then(conn => {
     console.log('✅  MySQL conectado correctamente');
@@ -25,5 +24,3 @@ pool.getConnection()
   });
 
 module.exports = pool;
-// db.js — Conexión a MySQL con mysql2
-// v2
