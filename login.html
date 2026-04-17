@@ -1,0 +1,32 @@
+<script>
+  function togglePassword() {
+    const input = document.getElementById('contrasena');
+    input.type = input.type === 'password' ? 'text' : 'password';
+  }
+
+  function iniciarSesion() {
+    const usuario = document.getElementById('usuario').value;
+    const contrasena = document.getElementById('contrasena').value;
+    const errorMsg = document.getElementById('error-msg');
+
+    fetch('/api/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ usuario: usuario, password: contrasena })
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.ok) {
+        alert("Login exitoso ✅");
+      } else {
+        errorMsg.style.display = 'block';
+        errorMsg.textContent = data.message || 'Error';
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      errorMsg.style.display = 'block';
+      errorMsg.textContent = 'Error al conectar con el servidor';
+    });
+  }
+</script>
