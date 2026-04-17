@@ -10,15 +10,20 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
-// ✅ Servir archivos desde /public
+// ✅ Servir archivos estáticos desde /public
 app.use(express.static(path.join(__dirname, 'public')));
+
+// ✅ FORZAR que / cargue login.html
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'login.html'));
+});
 
 // ✅ LOGIN
 app.post('/api/login', async (req, res) => {
   const { usuario, password } = req.body;
 
   if (!usuario || !password) {
-    return res.status(400).json({ ok: false, message: 'Completa todos los campos' });
+    return res.status(400).json({ ok: false });
   }
 
   try {
@@ -30,8 +35,8 @@ app.post('/api/login', async (req, res) => {
     res.json({ ok: true });
 
   } catch (err) {
-    console.error('Error:', err.message);
-    res.status(500).json({ ok: false, message: 'Error en servidor' });
+    console.error(err);
+    res.status(500).json({ ok: false });
   }
 });
 
