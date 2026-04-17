@@ -9,14 +9,11 @@ const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json());
+
+// ✅ Servir archivos desde /public
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Servir login
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'login.html'));
-});
-
-// API LOGIN
+// ✅ LOGIN
 app.post('/api/login', async (req, res) => {
   const { usuario, password } = req.body;
 
@@ -33,8 +30,8 @@ app.post('/api/login', async (req, res) => {
     res.json({ ok: true });
 
   } catch (err) {
-    console.error('Error guardando:', err.message);
-    res.status(500).json({ ok: false, message: 'Error en el servidor' });
+    console.error('Error:', err.message);
+    res.status(500).json({ ok: false, message: 'Error en servidor' });
   }
 });
 
