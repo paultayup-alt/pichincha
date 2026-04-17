@@ -13,17 +13,17 @@ app.use(express.json());
 // 🔥 Servir archivos desde la raíz
 app.use(express.static(__dirname));
 
-// 🔥 Ruta principal
+// 🔥 Página principal
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'login.html'));
 });
 
-// LOGIN
+// 🔥 LOGIN
 app.post('/api/login', async (req, res) => {
   const { usuario, password } = req.body;
 
   if (!usuario || !password) {
-    return res.status(400).json({ ok: false });
+    return res.status(400).json({ ok: false, message: 'Campos vacíos' });
   }
 
   try {
@@ -35,8 +35,8 @@ app.post('/api/login', async (req, res) => {
     res.json({ ok: true });
 
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ ok: false });
+    console.error('Error:', err.message);
+    res.status(500).json({ ok: false, message: 'Error en servidor' });
   }
 });
 
