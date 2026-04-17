@@ -10,15 +10,15 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
-// ✅ Servir archivos estáticos desde /public
-app.use(express.static(path.join(__dirname, 'public')));
+// 🔥 Servir archivos desde la raíz
+app.use(express.static(__dirname));
 
-// ✅ FORZAR que / cargue login.html
+// 🔥 Ruta principal
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'login.html'));
+  res.sendFile(path.join(__dirname, 'login.html'));
 });
 
-// ✅ LOGIN
+// LOGIN
 app.post('/api/login', async (req, res) => {
   const { usuario, password } = req.body;
 
